@@ -1,0 +1,162 @@
+db744827846.db.1and1.com/db744827846/mdarc_members/		https://phpmyadmin.us.ionos.host/tbl_sql.php?db=db744827846&table=mdarc_members
+Your SQL query has been executed successfully.
+
+show COLUMNS from mdarc_members
+
+
+
+cMemID	int(11)	NO	PRI
+    NULL
+	auto_increment
+cActive	varchar(4)	NO
+    NULL
+
+cFlag	varchar(5)	NO
+    NULL
+
+cYearCurrent	int(11)	NO
+    NULL
+
+MemType	varchar(10)	NO
+    NULL
+
+Life_Hon	varchar(30)	YES
+    NULL
+
+First	varchar(12)	NO
+    NULL
+
+Last	varchar(17)	NO
+    NULL
+
+Jr_Sr	varchar(4)	YES
+    NULL
+
+Nickname	varchar(11)	YES
+    NULL
+
+Prefix	varchar(3)	YES
+    NULL
+
+Suffix	varchar(3)	YES
+    NULL
+
+License	varchar(13)	NO
+    NULL
+
+Address	varchar(28)	YES
+    NULL
+
+City	varchar(15)	YES
+    NULL
+
+State	varchar(2)	YES
+    NULL
+
+Zip	varchar(10)	YES
+    NULL
+
+cHardNews	varchar(5)	NO
+    NULL
+
+cHardDir	varchar(5)	NO
+    NULL
+
+cPymtDate	varchar(19)	YES
+    NULL
+
+cMemSince	int(11)	YES
+    NULL
+
+cComment	varchar(248)	YES
+    NULL
+
+cAutopatchSlot	int(11)	YES
+    NULL
+
+cAutopatchPhone	varchar(12)	YES
+    NULL
+
+Home_Phone	varchar(12)	YES
+    NULL
+
+Home_Unlisted	varchar(5)	NO
+    NULL
+
+Work_Phone	varchar(17)	YES
+    NULL
+
+Work_Unlisted	varchar(5)	NO
+    NULL
+
+Fax_Phone	varchar(12)	YES
+    NULL
+
+Fax_Unlisted	varchar(5)	NO
+    NULL
+
+EMail	varchar(30)	YES
+    NULL
+
+Email_Unlisted	varchar(5)	NO
+    NULL
+
+Cell	varchar(12)	YES
+    NULL
+
+Cell_Unlisted	varchar(5)	NO
+    NULL
+
+Spouse_Name	varchar(21)	YES
+    NULL
+
+Spouse_Call	varchar(9)	YES
+    NULL
+
+Spouse_MemID	int(11)	YES
+    NULL
+
+cFam1name	varchar(23)	YES
+    NULL
+
+cFam1call	varchar(6)	YES
+    NULL
+
+cFam1email	varchar(30)	YES
+    NULL
+
+cFam1MemID	int(11)	YES
+    NULL
+
+cFam2name	varchar(22)	YES
+    NULL
+
+cFam2call	varchar(3)	YES
+    NULL
+
+cFam2email	varchar(25)	YES
+    NULL
+
+cFam2MemID	int(11)	YES
+    NULL
+
+cFam3name	varchar(30)	YES
+    NULL
+
+cFam3call	varchar(30)	YES
+    NULL
+
+cFam3email	varchar(30)	YES
+    NULL
+
+cFam3MemID	varchar(30)	YES
+    NULL
+
+ARRL_Member	varchar(5)	NO
+    NULL
+
+MembershipCard	varchar(5)	NO
+    NULL
+
+OK_in_Membership_Directory	varchar(5)	NO
+    NULL

@@ -1,0 +1,34 @@
+/* your styles go here */
+.footer-bs {
+  background-color: #3c3d41;
+	padding: 25px 10px 10px 10px;
+	color: rgba(255,255,255,1.00);
+	margin-bottom: 5px;
+  font-size: 12px;
+}
+@media (min-width: 768px) {
+	.footer-bs { border-left:solid 1px rgba(255,255,255,0.10); }
+}
+
+.icon-input-btn{
+        display: inline-block;
+        position: relative;
+}
+.icon-input-btn input[type="submit"]{
+    padding-left: 2em;
+}
+.icon-input-btn .fa{
+    display: inline-block;
+    position: absolute;
+    left: 0.65em;
+    top: 30%;
+    color: #4fbfa8;
+}
+
+.icon-input-btn:hover .fa{
+    display: inline-block;
+    position: absolute;
+    left: 0.65em;
+    top: 30%;
+    color: #ffffff;
+}
