@@ -5,19 +5,13 @@ use CodeIgniter\Controller;
 class Staff extends BaseController {
 	var $username;
 
+/**
+* Controller for MDARC Staff
+*/
 	public function index() {
-		//helper(['form', 'url']);
-		//$user = $this->request->getPost('user');
-		//$pass = $this->request->getPost('pass');
 	  echo view('template/header');
 		if($this->check_staff()) {
-					$data['title'] = 'Good to Go';
-					$data['msg'] = 'Good to go. You can go home ' . anchor('Home', 'here'). '<br><br>';
-					//$this->mem_mod->get_members(NULL);
-					//echo view('status/status_view', $data);
-					$param['lic'] = $this->data_mod->get_lic();
-					$param['states'] = $this->data_mod->get_states_array();
-					echo view('members/members_view', $this->mem_mod->get_mems($param));
+					echo view('staff/staff_view');
 	    }
 	    else {
 	        $data['title'] = 'Login Error';
@@ -28,10 +22,25 @@ class Staff extends BaseController {
 			echo view('template/footer');
 	}
 
+	public function show_members() {
+		echo view('template/header');
+		if($this->check_staff()) {
+			$param['states'] = $this->data_mod->get_states_array();
+			$param['lic'] = $this->data_mod->get_lic();
+			echo view('staff/members_view', $this->staff_mod->get_mems($param));
+		}
+		else {
+			$data['title'] = 'Authorization Error';
+			$data['msg'] = 'You may not be authorized to view this page. Go back and try again ' . anchor(base_url(), 'here'). '<br><br>';
+			echo view('status/status_view', $data);
+		}
+		echo view('template/footer');
+	}
+
 	public function add_mem() {
 		echo view('template/header');
 		if($this->check_staff()) {
-			echo view('members/add_mem_view', array('states' => $this->data_mod->get_states_array(), 'lic' => $this->data_mod->get_lic()));
+			echo view('staff/add_mem_view', array('states' => $this->data_mod->get_states_array(), 'lic' => $this->data_mod->get_lic()));
 		}
 		else {
 			$data['title'] = 'Login Error';
@@ -49,10 +58,9 @@ class Staff extends BaseController {
 
 	public function update_mem_date() {
 		echo view('template/header');
-		$this->mem_mod->update_mem_date();
+		$this->staff_mod->update_mem_date();
 		$data['title'] = 'Good to Go';
 		$data['msg'] = 'Good to go. You can go home ' . anchor('Home', 'here'). '<br><br>';
-		//$this->mem_mod->get_members(NULL);
 		echo view('status/status_view', $data);
 		echo view('template/footer');
 	}
@@ -79,7 +87,7 @@ class Staff extends BaseController {
 
 	public function update_cur_yr() {
 		echo view('template/header');
-		$this->mem_mod->update_cur_yr();
+		$this->staff_mod->update_cur_yr();
 		$data['title'] = 'Good to Go';
 		$data['msg'] = 'Good to go. You can go home ' . anchor('Home', 'here'). '<br><br>';
 		$data['title'] = 'OK!';
@@ -118,10 +126,10 @@ class Staff extends BaseController {
 				$this->uri->setSilent();
 				$param['id'] = $this->uri->getSegment(2);
 
-				if ($this->mem_mod->edit_mem($param)) {
+				if ($this->staff_mod->edit_mem($param)) {
 					$param['states'] = $this->data_mod->get_states_array();
 					$param['lic'] = $this->data_mod->get_lic();
-					echo view('members/members_view', $this->mem_mod->get_mems($param));
+					echo view('staff/members_view', $this->staff_mod->get_mems($param));
 				}
 				else {
 					$data['title'] = 'Douplicate Entry Error!';
@@ -142,10 +150,10 @@ class Staff extends BaseController {
 		echo view('template/header');
 		if($this->check_staff()) {
 			$this->uri->setSilent();
-			$this->mem_mod->delete_mem($this->uri->getSegment(2));
+			$this->staff_mod->delete_mem($this->uri->getSegment(2));
 			$param['states'] = $this->data_mod->get_states_array();
 			$param['lic'] = $this->data_mod->get_lic();
-			echo view('members/members_view', $this->mem_mod->get_mems($param));
+			echo view('staff/members_view', $this->staff_mod->get_mems($param));
 		}
 		else {
 			$data['title'] = 'Authorization Error';
@@ -160,7 +168,7 @@ class Staff extends BaseController {
 	public function set_silents() {
 		echo view('template/header');
 		$data['title'] = 'Set Silent Keys';
-		$this->mem_mod->set_silents();
+		$this->staff_mod->set_silents();
 		$data['msg'] = 'Silent keys set -> go home ' . anchor('Home', 'here'). '<br><br>';
 		echo view('status/status_view', $data);
 		echo view('template/footer');
@@ -177,10 +185,10 @@ class Staff extends BaseController {
 			$param['silent_date'] =  strtotime($this->request->getPost('silent_date'));
 			$param['usr_type'] = 98;
 			$param['silent_year'] = date('Y', $param['silent_date']);
-			$this->mem_mod->set_silent($param);
+			$this->staff_mod->set_silent($param);
 			$param['states'] = $this->data_mod->get_states_array();
 			$param['lic'] = $this->data_mod->get_lic();
-			echo view('members/members_view', $this->mem_mod->get_mems($param));
+			echo view('staff/members_view', $this->staff_mod->get_mems($param));
 		}
 		else {
 			$data['title'] = 'Authorization Error';
@@ -194,10 +202,31 @@ class Staff extends BaseController {
 		echo view('template/header');
 		if($this->check_staff()) {
 			$this->uri->setSilent();
-			$this->mem_mod->unset_silent($this->uri->getSegment(3));
+			$this->staff_mod->unset_silent($this->uri->getSegment(3));
 			$param['states'] = $this->data_mod->get_states_array();
 			$param['lic'] = $this->data_mod->get_lic();
-			echo view('members/members_view', $this->mem_mod->get_mems($param));
+			echo view('staff/members_view', $this->staff_mod->get_mems($param));
+		}
+		else {
+			$data['title'] = 'Authorization Error';
+			$data['msg'] = 'You may not be authorized to view this page. Go back and try again ' . anchor(base_url(), 'here'). '<br><br>';
+			echo view('status/status_view', $data);
+		}
+		echo view('template/footer');
+	}
+
+/**
+* Generates report for MDARC Staff
+*/
+	public function staff_report() {
+		echo view('template/header');
+		if($this->check_staff()) {
+
+
+
+			$param['states'] = $this->data_mod->get_states_array();
+			$param['lic'] = $this->data_mod->get_lic();
+			echo view('staff/members_view', $this->staff_mod->get_mems($param));
 		}
 		else {
 			$data['title'] = 'Authorization Error';

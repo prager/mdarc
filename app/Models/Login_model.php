@@ -76,6 +76,8 @@ public function check_credentials($data) {
       $_SESSION['logged'] = TRUE;
       $_SESSION['role'] = $usr_arr['role'];
       $_SESSION['level'] = $usr_arr['level'];
+      $_SESSION['type_code'] = $usr_arr['type_code'];
+      $_SESSION['controller'] = $usr_arr['controller'];
 
       $retval = TRUE;
     }

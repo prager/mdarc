@@ -2,7 +2,7 @@
 
 use CodeIgniter\Controller;
 
-class Staff extends BaseController {
+class Master extends BaseController {
 	var $username;
 
 /**
@@ -14,10 +14,7 @@ class Staff extends BaseController {
 		//$pass = $this->request->getPost('pass');
 	  echo view('template/header');
 		if($this->check_mem()) {
-					$data['title'] = 'Good to Go';
-					$data['msg'] = 'Good to go. You can go home ' . anchor('Home', 'here'). '<br><br>';
-					//$this->mem_mod->get_members(NULL);
-					echo view('status/status_view', $data);
+					echo view('master/master_view');
 	    }
 	    else {
 	        $data['title'] = 'Login Error';

@@ -73,7 +73,17 @@ class User_model extends Model {
     $retarr['zip'] = $user->zip_cd;
     $retarr['role'] = $user->type_code;
     $retarr['username'] = $user->username;
+//this is legacy
     $retarr['level'] = $user->type_code;
+//this is current
+    $retarr['type_code'] = $user->type_code;
+
+//get the controller for the user type
+    $db = \Config\Database::connect();
+    $builder = $db->table('user_types');
+    $builder->where('type_code', $retarr['type_code']);
+    $retarr['controller'] = $builder->get()->getRow()->controller;
+    $db->close();
     return $retarr;
   }
 

@@ -25,11 +25,15 @@ $routes->setAutoRoute(true);
 $routes->add('home', 'Home::index');
 $routes->add('Home', 'Home::index');
 $routes->add('staff', 'Staff::index');
+$routes->add('member', 'Member::index');
+$routes->add('master', 'Master::index');
 $routes->add('edit-mem', 'Staff::edit_mem');
 $routes->add('edit-mem/(:num)', 'Staff::edit_mem');
 $routes->add('delete-mem/(:num)', 'Staff::delete_mem');
 $routes->add('set-silent-key/(:num)', 'Staff::set_silent');
-$routes->add('members', 'Staff::index');
+$routes->add('members', 'Staff::show_members');
+$routes->add('logout', 'Home::logout');
+$routes->add('login', 'Login::index');
 
 /**
  * --------------------------------------------------------------------

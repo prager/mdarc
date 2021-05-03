@@ -2,6 +2,9 @@
 
 use CodeIgniter\Controller;
 
+/**
+* This is the default controller
+*/
 class Home extends BaseController {
 	public function index() {
 		//echo view('welcome_message');
@@ -10,12 +13,8 @@ class Home extends BaseController {
 			echo view('public/main_view');
 		}
 		else {
-			//$data['user'] = $this->login_mod->get_curr_user();
-			$data['title'] = 'Working on Admin landing page';
-			$data['msg'] = 'Still working on this. Check again later. ' . anchor('Home/logout', 'Logout') . '<br><br>';
-			//$data['msg'] = ' Update DB: ' . anchor('staff/set_silents', 'Set Silents') . '<br><br>';
-			$data['msg'] .= 'Membership page ' . anchor('staff', 'here');
-			echo view('status/status_view', $data);
+			//return redirect()->to(base_url(). '/' . 'index.php/' . $this->login_mod->get_cur_user()['controller']);
+			return redirect()->route($this->login_mod->get_cur_user()['controller']);
 		}
 		echo view('template/footer');
 	}
@@ -27,14 +26,6 @@ class Home extends BaseController {
 		echo view('status/status_view', $data);
 		echo view('template/footer');
 	}
-
-	/*public function register() {
-		echo view('template/header');
-		$data['title'] = 'Working';
-		$data['msg'] = 'Still working on this. Check again later. Go to home page ' . anchor('Main_con', 'here'). '<br><br>';
-		echo view('status/status_view', $data);
-		echo view('template/footer');
-	}*/
 
 	public function register() {
 		$data = array();
@@ -162,7 +153,6 @@ class Home extends BaseController {
 	}
 
 	public function logout() {
-		//$login_mod = new \App\Models\Login_model();
 		$this->login_mod->logout();
 		echo view('template/header', array('logged' => FALSE));
 		echo view('public/main_view');

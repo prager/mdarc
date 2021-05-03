@@ -23,7 +23,7 @@
           <div class="box-simple box-white same-height">
           <!--<form action="customer-orders.html" method="get">-->
           <?php //$validation->listErrors(); ?>
-          <?php echo form_open('Login'); ?>
+          <?php echo form_open('login'); ?>
             <br>
                 <h4>Enter Username and Password</h4>
                 <br>

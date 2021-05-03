@@ -8,11 +8,7 @@ class Login extends BaseController {
 	public function index() {
 		helper(['form', 'url']);
 		if($this->validate_credentials()) {
-	        echo view('template/header');
-					$login_mod = new \App\Models\Login_model();
-					$data['user'] = $this->username;
-					echo view('admin/admin_view', $data);
-			    echo view('template/footer');
+					return redirect()->to(base_url(). '/' . 'index.php/' . $this->login_mod->get_cur_user()['controller']);
 	    }
 	    else {
 	        echo view('template/header');
