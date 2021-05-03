@@ -56,15 +56,6 @@ class Staff extends BaseController {
 				return TRUE;
 	}
 
-	public function update_mem_date() {
-		echo view('template/header');
-		$this->staff_mod->update_mem_date();
-		$data['title'] = 'Good to Go';
-		$data['msg'] = 'Good to go. You can go home ' . anchor('Home', 'here'). '<br><br>';
-		echo view('status/status_view', $data);
-		echo view('template/footer');
-	}
-
 	public function download_due_emails() {
 		if($this->check_staff())
 			return $this->response->download('files/due-emails.txt', NULL);
@@ -180,9 +171,8 @@ class Staff extends BaseController {
 		echo view('template/header');
 		if($this->check_staff()) {
 			$this->uri->setSilent();
-			$param['id'] = $this->uri->getSegment(3);
-			echo 'id: ' . $param['id'];
-			$param['silent_date'] =  strtotime($this->request->getPost('silent_date'));
+			$param['id'] = $this->uri->getSegment(2);
+			$param['silent_date'] =  time();
 			$param['usr_type'] = 98;
 			$param['silent_year'] = date('Y', $param['silent_date']);
 			$this->staff_mod->set_silent($param);
@@ -202,7 +192,7 @@ class Staff extends BaseController {
 		echo view('template/header');
 		if($this->check_staff()) {
 			$this->uri->setSilent();
-			$this->staff_mod->unset_silent($this->uri->getSegment(3));
+			$this->staff_mod->unset_silent($this->uri->getSegment(2));
 			$param['states'] = $this->data_mod->get_states_array();
 			$param['lic'] = $this->data_mod->get_lic();
 			echo view('staff/members_view', $this->staff_mod->get_mems($param));
@@ -221,12 +211,30 @@ class Staff extends BaseController {
 	public function staff_report() {
 		echo view('template/header');
 		if($this->check_staff()) {
-
-
-
+//this is todo - add the data for staff reports
 			$param['states'] = $this->data_mod->get_states_array();
 			$param['lic'] = $this->data_mod->get_lic();
-			echo view('staff/members_view', $this->staff_mod->get_mems($param));
+			echo view('staff/staff_report_view', $this->staff_mod->get_mems($param));
+		}
+		else {
+			$data['title'] = 'Authorization Error';
+			$data['msg'] = 'You may not be authorized to view this page. Go back and try again ' . anchor(base_url(), 'here'). '<br><br>';
+			echo view('status/status_view', $data);
+		}
+		echo view('template/footer');
+	}
+
+	public function load_silent() {
+		echo view('template/header');
+		if($this->check_staff()) {
+				$this->uri->setSilent();
+				$param['silent_date'] = strtotime($this->request->getPost('sil_date'));
+				$param['silent_year'] = date('Y', $param['silent_date']);
+				$param['id'] = $this->uri->getSegment(2);
+				$this->staff_mod->set_silent($param);
+				$param['states'] = $this->data_mod->get_states_array();
+				$param['lic'] = $this->data_mod->get_lic();
+				echo view('staff/members_view', $this->staff_mod->get_mems($param));
 		}
 		else {
 			$data['title'] = 'Authorization Error';

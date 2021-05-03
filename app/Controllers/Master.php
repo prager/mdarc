@@ -6,12 +6,9 @@ class Master extends BaseController {
 	var $username;
 
 /**
-* Controller for the rank and file members
+* Controller for the webmaster
 */
 	public function index() {
-		helper(['form', 'url']);
-		//$user = $this->request->getPost('user');
-		//$pass = $this->request->getPost('pass');
 	  echo view('template/header');
 		if($this->check_mem()) {
 					echo view('master/master_view');

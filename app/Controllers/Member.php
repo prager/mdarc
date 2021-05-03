@@ -3,21 +3,15 @@
 use CodeIgniter\Controller;
 
 class Staff extends BaseController {
-	var $username;
 
 /**
 * Controller for the rank and file members
 */
 	public function index() {
 		helper(['form', 'url']);
-		//$user = $this->request->getPost('user');
-		//$pass = $this->request->getPost('pass');
 	  echo view('template/header');
 		if($this->check_mem()) {
-					$data['title'] = 'Good to Go';
-					$data['msg'] = 'Good to go. You can go home ' . anchor('Home', 'here'). '<br><br>';
-					//$this->mem_mod->get_members(NULL);
-					echo view('status/status_view', $data);
+					echo view('status/member_view');
 	    }
 	    else {
 	        $data['title'] = 'Login Error';

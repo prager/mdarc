@@ -45,7 +45,7 @@ class Staff_model extends Model {
     foreach($res as $member) {
       $elem = array();
       $elem['id'] = $member->id_members;
-      
+
 //set the true or false values for boolean db entries
       $elem['carrier'] = filter_var(trim(strtoupper($member->hard_news)), FILTER_VALIDATE_BOOLEAN);
       $elem['dir'] = filter_var(trim(strtoupper($member->hard_dir)), FILTER_VALIDATE_BOOLEAN);
@@ -67,6 +67,7 @@ class Staff_model extends Model {
       $elem['license'] = $member->license;
       $elem['hard_news'] = $member->hard_news;
       $elem['pay_date'] = date('Y-m-d', $member->paym_date);
+      $elem['silent_date'] = date('Y-m-d', $member->silent_date);
       $member->mem_since == NULL ? $elem['mem_since'] = 'N/A' : $elem['mem_since'] = $member->mem_since;
       $member->email == NULL ? $elem['email'] = 'N/A' : $elem['email'] = $member->email;
       $elem['ok_mem_dir'] = $member->ok_mem_dir;
@@ -258,8 +259,7 @@ class Staff_model extends Model {
     $id = $param['id'];
     unset($param['id']);
     $builder->resetQuery();
-    $builder->update(array('usr_type' => 98,'silent_date' => time(),
-    'silent_year' => date('Y', time())), ['id_members' => $id]);
+    $builder->update($param, ['id_members' => $id]);
     $db->close();
   }
 

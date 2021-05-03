@@ -16,21 +16,6 @@
 <div id="content">
   <div class="container">
     <div class="row bar">
-<!--<div class="col-md-12">
-      <p>
-  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Link with href
-  </a>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Button with data-target
-  </button>
-</p>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-  </div>
-</div>
-</div>-->
       <div class="col-md-12">
         <nav id="myTab" role="tablist" class ="nav nav-tabs"><a id="tab4-1-tab" data-toggle="tab" href="#tab4-1" role="tab"
         aria-controls="tab4-1" aria-selected="true" class="nav-item nav-link active"> <i class="icon-star"></i>Members Current (<?php echo $cnt_cur; ?>)</a>
@@ -201,8 +186,8 @@
           <tbody>
           <?php foreach($silent_keys as $mem) {?>
             <tr>
-             <td><a href="#" data-toggle="modal" data-target="#editMem<?php echo $mem['id']; ?>"><?php echo $mem['fname'] . ' ' . $mem['lname']; ?></a>
-                      <?php include 'modal_update_mem.php'; ?></td>
+             <td><a href="#" data-toggle="modal" data-target="#editSilent<?php echo $mem['id']; ?>"><?php echo $mem['fname'] . ' ' . $mem['lname']; ?></a>
+                      <?php include 'modal_edit_silent.php'; ?></td>
              <td><?php echo $mem['callsign']; ?></td>
              <td><?php echo $mem['silent_date']; ?></td>
              <td><?php echo $mem['silent_year']; ?></td>

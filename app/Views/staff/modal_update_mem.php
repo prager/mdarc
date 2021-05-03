@@ -232,10 +232,9 @@
           			 echo form_textarea($data, $mem['comment']);
           			?>
             </div>
-            <!--<div class="form-group col-lg-4">
-                <label class="font-weight-bold text-small" for="type">Membership Type</label>
-                <?php //echo form_dropdown('type', array('Primary', 'Individual', 'Spouse'), 0, 'class="form-control"'); ?>
-            </div>-->
+            <div class="form-group col-lg-12">
+              <?php echo anchor('set-silent-key/'. $mem['id'], 'Set Silent Key'); ?>
+            </div>
             <div class="form-group col-lg-12 text-center"><br>
               <button type="submit" class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> Submit Update</button><br><br>
             </div>
