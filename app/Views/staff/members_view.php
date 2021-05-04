@@ -99,7 +99,7 @@
       </div>
     </div>
     <div id="tab4-3" role="tabpanel" aria-labelledby="tab4-3-tab" class="tab-pane fade">
-      <?php echo anchor('staff/download_due_emails', 'Download Due Emails'); ?>
+      <?php echo anchor('staff/download_due_emails', 'Download Due Emails') . ' | ' . anchor('staff/download_pay_due', 'Download Pay Due'); ?>
       <div class="table-responsive">
         <table id="example" style="width:100%" class="table table-striped table-bordered text-left">
           <thead>

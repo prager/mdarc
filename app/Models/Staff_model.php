@@ -67,6 +67,7 @@ class Staff_model extends Model {
       $elem['license'] = $member->license;
       $elem['hard_news'] = $member->hard_news;
       $elem['pay_date'] = date('Y-m-d', $member->paym_date);
+      $elem['pay_date_file'] = date('Y/m/d', $member->paym_date);
       $elem['silent_date'] = date('Y-m-d', $member->silent_date);
       $member->mem_since == NULL ? $elem['mem_since'] = 'N/A' : $elem['mem_since'] = $member->mem_since;
       $member->email == NULL ? $elem['email'] = 'N/A' : $elem['email'] = $member->email;
@@ -76,7 +77,6 @@ class Staff_model extends Model {
       $member->silent_date > 1 ? $elem['silent_date'] = date('Y-m-d', $member->silent_date) : $elem['silent_date'] = 'No Date';
       $elem['silent_year'] = $member->silent_year;
       $member->usr_type == 98 ? $elem['silent'] = TRUE : $elem['silent'] = FALSE;
-
       $member->cur_year == 99 ? array_push($del_members, $elem) : FALSE;
 
 //Push all the members including silent keys
@@ -140,13 +140,23 @@ class Staff_model extends Model {
     array_multisort(array_column($silent_keys, 'lname'), SORT_ASC, $silent_keys);
 
 //build the csv file for downloading all the members
-    $all_mem_str = "id,fname,lname,address,city,state,zip,email,mem type,callsign,license,cur yr,pay date,mem since,hard news,arrl,comment\n";
+    $all_mem_str = "id,fname,lname,phone,cell phone,address,city,state,zip,email,mem type,callsign,license,cur yr,pay date,mem since,hard news,arrl,comment\n";
     foreach($all_members as $mem) {
-      $all_mem_str .= $mem['id'].",".$mem['fname'].",".$mem['lname'].",".str_replace(","," ", $mem['address']).",".$mem['city'].",".$mem['state'].",".$mem['zip'].",".$mem['email'].
-                      ",".$mem['mem_type'].",".$mem['callsign'].",".$mem['license'].",".$mem['cur_year'].",".$mem['pay_date'].",".$mem['mem_since'].",".
+      $all_mem_str .= $mem['id'].",".$mem['fname'].",".$mem['lname'].",".$mem['h_phone'].",".$mem['w_phone'].","
+                  .str_replace(","," ", $mem['address']).",".$mem['city'].",".$mem['state'].",".$mem['zip'].",".$mem['email'].
+                      ",".$mem['mem_type'].",".$mem['callsign'].",".$mem['license'].",".$mem['cur_year'].",".$mem['pay_date_file'].",".$mem['mem_since'].",".
                       $mem['hard_news'].",".$mem['arrl'].",". str_replace(","," ", $mem['comment']) . "\n";
     }
     file_put_contents('files/all_members.csv', $all_mem_str);
+
+    $pay_due_str = "id,fname,lname,phone,cell phone,address,city,state,zip,email,mem type,callsign,license,cur yr,pay date,mem since,hard news,arrl,comment\n";
+    foreach($pay_due as $mem) {
+      $pay_due_str .= $mem['id'].",".$mem['fname'].",".$mem['lname'].",".$mem['h_phone'].",".$mem['w_phone'].","
+                  .str_replace(","," ", $mem['address']).",".$mem['city'].",".$mem['state'].",".$mem['zip'].",".$mem['email'].
+                      ",".$mem['mem_type'].",".$mem['callsign'].",".$mem['license'].",".$mem['cur_year'].",".$mem['pay_date_file'].",".$mem['mem_since'].",".
+                      $mem['hard_news'].",".$mem['arrl'].",". str_replace(","," ", $mem['comment']) . "\n";
+    }
+    file_put_contents('files/pay_due.csv', $pay_due_str);
 
     $retarr = array();
     $retarr['lic'] = $param['lic'];
@@ -198,17 +208,15 @@ class Staff_model extends Model {
       $builder->resetQuery();
       $builder->update($param, ['id_members' => $id]);
     }
+    elseif($builder->countAllResults() == 0) {
+          $param['update_type'] = 'Initial insert';
+          $param['mem_type'] = 'Individual';
+          $builder->resetQuery();
+          $builder->insert($param);
+        }
     else {
-    if($builder->countAllResults() == 0) {
-        $param['update_type'] = 'Initial insert';
-        $param['mem_type'] = 'Individual';
-        $builder->resetQuery();
-        $builder->insert($param);
-      }
-      else {
         $retval = FALSE;
       }
-    }
     $db->close();
 
     return $retval;

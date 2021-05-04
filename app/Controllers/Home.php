@@ -88,15 +88,6 @@ class Home extends BaseController {
     echo view('template/header');
 		if($param['lname'] == '' || $param['fname'] == '' || $email_flag == FALSE || $param['street'] == '' || $param['city'] == '' || $param['zip_cd']
 				|| $isPhoneNum == FALSE) {
-
-						/*echo 'lname: ' . $param['lname'] . '<br>';
-						echo 'fname: ' . $param['fname'] . '<br>';
-						echo 'email: ' . $param['email'] . '<br>';
-						echo 'street: ' . $param['street'] . '<br>';
-						echo 'city: ' . $param['city'] . '<br>';
-						echo 'zip_cd: ' . $param['zip_cd'] . '<br>';
-						echo 'phone: ' . $param['phone'] . '<br>';*/
-
             $data = $param;
             $data['state'] = $param['state_cd'];
             $data['zip'] = $param['zip_cd'];

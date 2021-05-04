@@ -27,8 +27,8 @@
     <div class="row">
       <div class="col-md-1">&nbsp;</div>
       <div class="col-md-10 text-center">
-        <p>Members: <?php echo anchor('members', 'Members'); ?> </p>
-        <p>Staff Report: <?php echo anchor('staff-report', 'Staff Report'); ?> </p>
+        <p><?php echo anchor('members', 'Members Listing'); ?> </p>
+        <p><?php echo anchor('staff-report', 'Show Staff Reports'); ?> </p>
         <hr>
         <br><br><br><br><br>
       </div>
