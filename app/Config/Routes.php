@@ -37,6 +37,7 @@ $routes->add('unset-silent-key/(:num)', 'Staff::unset_silent');
 $routes->add('members', 'Staff::show_members');
 $routes->add('logout', 'Home::logout');
 $routes->add('login', 'Login::index');
+$routes->add('print-dir', 'Staff::print_dir');
 
 /**
  * --------------------------------------------------------------------

@@ -85,6 +85,16 @@ class User_model extends Model {
     $retarr['controller'] = $builder->get()->getRow()->controller;
     $db->close();
     return $retarr;
+  } 
+
+/**
+* Validates user and password inspired by:
+* https://stackoverflow.com/questions/11873990/create-preg-match-for-password-validation-allowing
+*/
+  public function validate_pass($param) {
+    //preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/',$password)
+
+    //and then also check for duplicate username
   }
 
 }

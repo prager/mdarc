@@ -2,7 +2,7 @@
 
 use CodeIgniter\Controller;
 
-class Staff extends BaseController {
+class Member extends BaseController {
 
 /**
 * Controller for the rank and file members

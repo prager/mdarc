@@ -29,6 +29,7 @@
       <div class="col-md-10 text-center">
         <p><?php echo anchor('members', 'Members Listing'); ?> </p>
         <p><?php echo anchor('staff-report', 'Show Staff Reports'); ?> </p>
+        <p><?php echo anchor('print-dir', 'Print Directory view'); ?> </p>
         <hr>
         <br><br><br><br><br>
       </div>

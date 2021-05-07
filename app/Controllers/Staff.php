@@ -249,4 +249,11 @@ class Staff extends BaseController {
 		echo view('template/footer');
 	}
 
+	public function print_dir() {
+		echo view('template/simp_header');		
+			$param['states'] = $this->data_mod->get_states_array();
+			$param['lic'] = $this->data_mod->get_lic();
+		echo view('staff/print_dir_view', $this->staff_mod->get_mems($param));
+	}
+
 }
