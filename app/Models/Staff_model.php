@@ -98,7 +98,7 @@ class Staff_model extends Model {
       }
 
 //Collect the data of the member who didn't pay dues
-      elseif(($member->cur_year < $cur_yr && $member->silent_date == 0) &&
+      elseif(($member->cur_year == (intval($cur_yr) - 1) && $member->silent_date == 0) &&
         ($member->mem_type == 'Primary' || $member->mem_type == 'Individual') && $member->cur_year > 0) {
         if($elem['email'] != '') {
           array_push($due_emails_arr, $elem['email']);
