@@ -250,10 +250,24 @@ class Staff extends BaseController {
 	}
 
 	public function print_dir() {
-		echo view('template/simp_header');		
+		echo view('template/simp_header');
 			$param['states'] = $this->data_mod->get_states_array();
 			$param['lic'] = $this->data_mod->get_lic();
 		echo view('staff/print_dir_view', $this->staff_mod->get_mems($param));
+	}
+
+	/**
+	* Temporary routine to verify payments
+	*/
+	public function verify_payment() {
+			echo view('template/header');
+			$ret_data = $this->staff_mod->verify_payment();
+
+	//for now; perhaps do some report
+			$data['title'] = 'Payment Verified';
+			$data['msg'] = 'Go home ' . anchor('Home', 'here'). '<br><br>';
+			echo view('status/status_view', $data);
+			echo view('template/footer');
 	}
 
 }

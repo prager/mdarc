@@ -54,6 +54,9 @@ class Staff_model extends Model {
       $member->h_phone == NULL ? $elem['h_phone'] = '000-000-0000' : $elem['h_phone'] = $member->h_phone;
       $member->w_phone == NULL ? $elem['w_phone'] = '000-000-0000' : $elem['w_phone'] = $member->w_phone;
       $member->comment == NULL ? $elem['comment'] = '' : $elem['comment'] = $member->comment;
+      $elem['phone_unlisted'] = $member->h_phone_unlisted;
+      $elem['cell_unlisted'] = $member->w_phone_unlisted;
+      $elem['email_unlisted'] = $member->email_unlisted;
       $elem['fname'] = $member->fname;
       $elem['lname'] = $member->lname;
       $member->address == NULL ? $elem['address'] = 'N/A' : $elem['address'] = $member->address;
@@ -66,6 +69,8 @@ class Staff_model extends Model {
       $elem['callsign'] = $member->callsign;
       $elem['license'] = $member->license;
       $elem['hard_news'] = $member->hard_news;
+      $elem['spouse_name'] = $member->spouse_name;
+      $elem['spouse_call'] = $member->spouse_call;
       $elem['pay_date'] = date('Y-m-d', $member->paym_date);
       $elem['pay_date_file'] = date('Y/m/d', $member->paym_date);
       $elem['silent_date'] = date('Y-m-d', $member->silent_date);
@@ -283,4 +288,23 @@ class Staff_model extends Model {
     $db->close();
   }
 
+  /**
+	* Temporary routine to verify payments
+  * To do: should return some data how many records was corrected
+	*/
+  public function verify_payment() {
+    $db      = \Config\Database::connect();
+    $builder = $db->table('tMembers');
+    $mem_rec = $builder->get()->getResult();
+    $builder->resetQuery();
+    $builder = $db->table('paid_2021');
+    $paid_rec = $builder->get()->getResult();
+    $retarr = array();
+    foreach($mem_rec as $mem) {
+      foreach($paid_rec as $paid) {
+        //code to finish
+      }
+    }
+  }
+  return $retarr;
 }
