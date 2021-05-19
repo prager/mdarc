@@ -112,7 +112,7 @@ class Staff_model extends Model {
       }
 
 //Get the silent keys
-      elseif($member->usr_type == 98) {
+      elseif($member->silent_year > 0) {
         array_push($silent_keys, $elem);
       }
     }
@@ -302,9 +302,23 @@ class Staff_model extends Model {
     $retarr = array();
     foreach($mem_rec as $mem) {
       foreach($paid_rec as $paid) {
-        //code to finish
+        $name_arr = explode(",", $paid->Name);
+        $paid_fname = trim($name_arr[1]);
+        $paid_lname = trim($name_arr[0]);
+        if(($mem->fname == $paid_fname && $mem->lname == $paid_lname) && $mem->cur_year < 2021) {
+          $pay_date = strtotime($paid->Date);
+          $builder = $db->table('tMembers');
+          $builder->resetQuery();
+          $builder->update(array('cur_year' => 2021, 'paym_date' => $pay_date), ['id_members' => $mem->id_members]);
+          $paid_arr =array();
+          $paid_arr['fname'] = $paid_fname;
+          $paid_arr['lname'] = $paid_lname;
+          $paid_arr['pay_date'] = $paid->Date . ' | ' . $pay_date;
+          array_push($retarr, $paid_arr);
+        }
       }
     }
+    $db->close();
+    return $retarr;
   }
-  return $retarr;
 }

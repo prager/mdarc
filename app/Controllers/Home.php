@@ -86,20 +86,18 @@ class Home extends BaseController {
 		if (strlen($justNums) == 10) $isPhoneNum = TRUE;
 
     echo view('template/header');
-		if($param['lname'] == '' || $param['fname'] == '' || $email_flag == FALSE || $param['street'] == '' || $param['city'] == '' || $param['zip_cd']
+		if($param['lname'] == '' || $param['fname'] == '' || $email_flag == FALSE || $param['street'] == '' || $param['city'] == '' || $param['zip_cd'] == ''
 				|| $isPhoneNum == FALSE) {
             $data = $param;
             $data['state'] = $param['state_cd'];
             $data['zip'] = $param['zip_cd'];
             $data['title'] = 'Error!';
             $data['msg'] = '<span style="color: red">Please, fill all the required information. Thank you!</span>';
-						$data_mod = new \App\Models\Data_model();
 						$data['states'] = $data_mod->get_states_array();
             echo view('public/register_view', $data);
 
         }
         else {
-					$user_mod = new \App\Models\User_model();
           if($user_mod->register($param)) {
               $data['title'] = 'Thank you!';
 

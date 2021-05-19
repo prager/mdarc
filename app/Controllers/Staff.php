@@ -261,11 +261,15 @@ class Staff extends BaseController {
 	*/
 	public function verify_payment() {
 			echo view('template/header');
-			$ret_data = $this->staff_mod->verify_payment();
-
+			$retarr = $this->staff_mod->verify_payment();
+			$data['msg'] = 'Members corrected: <br>';
+			foreach($retarr as $mem) {
+				$data['msg'] .= $mem['lname'] . ' ' . $mem['fname'] . ' | ' . $mem['pay_date'] . '<br>';
+			}
+			$data['msg'] .= 'Total count: ' . count($retarr) . '<br>';
 	//for now; perhaps do some report
 			$data['title'] = 'Payment Verified';
-			$data['msg'] = 'Go home ' . anchor('Home', 'here'). '<br><br>';
+			$data['msg'] .= '<br>Go home ' . anchor('Home', 'here'). '<br><br>';
 			echo view('status/status_view', $data);
 			echo view('template/footer');
 	}
