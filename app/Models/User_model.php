@@ -60,6 +60,11 @@ class User_model extends Model {
     return $retarr;
   }
 
+/**
+* Retrieve user class properties and copy into array
+* @param class $user
+* @return array retarr[]
+*/
   public function get_user_arr($user) {
     $retarr = array();
     $retarr['id_user'] = $user->id_user;
@@ -85,7 +90,11 @@ class User_model extends Model {
     $retarr['controller'] = $builder->get()->getRow()->controller;
     $db->close();
     return $retarr;
-  } 
+  }
+
+  private function get_role($id) {
+    
+  }
 
 /**
 * Validates user and password inspired by:

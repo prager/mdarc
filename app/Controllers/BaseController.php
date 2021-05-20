@@ -43,6 +43,7 @@ class BaseController extends Controller
 		// $this->session = \Config\Services::session();
 		$this->login_mod = new \App\Models\Login_model();
 		$this->data_mod = new \App\Models\Data_model();
+		$this->master_mod = new \App\Models\Master_model();
 		$this->user_mod = new \App\Models\User_model();
 		$this->mem_mod = new \App\Models\Member_model();
 		$this->staff_mod = new \App\Models\Staff_model();

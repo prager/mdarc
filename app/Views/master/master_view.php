@@ -29,7 +29,9 @@
       <div class="col-md-10 text-center">
         <p>Staff page: <?php echo anchor('staff', 'Staff Page'); ?> </p>
         <p>Members: <?php echo anchor('members', 'Members'); ?> </p>
-        <p>Special function: <?php echo anchor('staff/verify_payment', 'Verify Payments'); ?></p>
+        <!--<p>Special function: <?php //echo anchor('staff/verify_payment', 'Verify Payments'); ?></p>-->
+        <p>Download user types: <?php echo anchor('master/download_user_types', 'Download User Types'); ?>
+        <p>Download users: <?php echo anchor('master/download_users', 'Download Users'); ?>
         <hr>
         <br><br><br><br><br>
       </div>

@@ -10,7 +10,7 @@ class Master extends BaseController {
 */
 	public function index() {
 	  echo view('template/header');
-		if($this->check_mem()) {
+		if($this->check_master()) {
 					echo view('master/master_view');
 	    }
 	    else {
@@ -22,8 +22,24 @@ class Master extends BaseController {
 			echo view('template/footer');
 	}
 
-	public function check_mem() {
+	public function check_master() {
 		if($this->login_mod->is_logged())
 			return TRUE;
+	}
+
+	public function download_user_types() {
+		if($this->check_master()) {
+			$this->master_mod->put_user_types();
+			return $this->response->download('files/user_types.csv', NULL);
+		}
+	}
+
+	public function download_users() {
+		$this->master_mod->put_users();
+		return $this->response->download('files/users.csv', NULL);
+	}
+
+	public function show_users() {
+		//to do code
 	}
 }
