@@ -64,7 +64,7 @@
                 		<input type="submit" class="btn btn-outline-primary" value=" Login ">
                 	</span>
                 </p>
-                <small>Register <?php echo anchor('Main_con/register', 'here' ); ?></small>
+                <small>Register <?php echo anchor('register', 'here' ); ?></small>
             <br>
           <?php echo form_close(); ?>
         </div>

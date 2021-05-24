@@ -12,11 +12,21 @@ class User_model extends Model {
     }
 
   public function register($param) {
-    $retval = True;
-    $bldr = $this->db->table('users');
+    $retarr = array();
+    $retarr['flag'] = TRUE;
+    $db  = \Config\Database::connect();
+    $bldr = $db->table('users');
+//check for duplicate email
     $bldr->where('email', $param['email']);
-    //$q = $bldr->get();
-    if($bldr->countAllResults() == 0) {
+    $cnt_email = $bldr->countAllResults();
+//check for duplicate fname and lname
+    $bldr->resetQuery();
+    $bldr = $this->db->table('users');
+    $bldr->where('fname', $param['fname']);
+    $bldr->where('lname', $param['lname']);
+    $cnt_name = $bldr->countAllResults();
+
+    if(($cnt_email == 0) && ($cnt_name == 0)) {
 
       $rand_str = bin2hex(openssl_random_pseudo_bytes(12));
       $param['verifystr'] = base_url() . '/index.php/Home/confirm_reg/' . $rand_str;
@@ -26,7 +36,7 @@ class User_model extends Model {
       $bldr->insert($param);
 
       $recipient = 'jank@jlkconsulting.info';
-      $subject = 'Admin User Registration - MDARC';
+      $subject = 'MDARC New User Registration';
       $message = $param['fname'] . ' ' . $param['lname'] . "\n\n".
  	        $param['street'] . "\n\n" .$param['city'] . ' ' . $param['state_cd'] . $param['zip_cd'] . "\n\n".
  	        ' Phone: ' . $param['phone'] . ' | Email: ' . $param['email'] . "\n\n" .
@@ -35,28 +45,45 @@ class User_model extends Model {
  	    mail($recipient, $subject, $message);
 
       $recipient = $param['email'];
-      $subject = 'MDARC User Registration - Admin Page by KM6NFC';
+      $subject = 'MDARC Member Portal User Registration';
 
-      $message = 'To finish your registration for MDARC Admin Page click on the following link or copy paste in the browser: ' . $param['verifystr'] . "\n\n";
+      $message = 'To finish your registration for MDARC Membership Portal click on the following link or copy paste in the browser: ' . $param['verifystr'] . "\n\n";
       $message .= 'You must do so within 72 hours otherwise you login information may be deactivated.
-                  Thank you for your interest in ARRL EB Section!';
+                  Thank you for your interest in Mount Diablo Amateur Radio Club!';
 	   	mail($recipient, $subject, $message);
     }
     else {
-      $retval = FALSE;
+      $retarr['flag'] = FALSE;
+      $retarr['msg'] = 'Duplicate Entry: ';
+      if($cnt_email > 0 && $cnt_name == 0) {
+        $retarr['msg'] .= 'the email you entered is already in the database. Please, use a different email.';
+      }
+      elseif($cnt_email == 0 && $cnt_name > 0) {
+        $retarr['msg'] .= 'first and last name is already in the database. Please, use the lost username and password utility.';
+      }
+      elseif($cnt_email > 0 && $cnt_name > 0) {
+        $retarr['msg'] .= 'email including first and last name is already in the database. Please, use the lost username and password utility.';
+      }
     }
-    return $retval;
+    $db->close;
+    return $retarr;
   }
 
+/**
+* Retrieves user data per the verify string when the user clicks the user verification URL in his/her email
+* @param string $verifystr
+* @return array retarr[]
+*/
   public function get_user_to_reg($verifystr) {
-    $builder = $this->db->table('users');
+    $db  = \Config\Database::connect();
+    $builder = $db->table('users');
     $builder->where('email_key', $verifystr);
     $row = $builder->get()->getRow();
     $retarr['fname'] = $row->fname;
     $retarr['lname'] = $row->lname;
     $retarr['id_user'] = $row->id_user;
     $retarr['username'] = '';
-
+    $retarr['msg'] = '';
     return $retarr;
   }
 
@@ -92,16 +119,21 @@ class User_model extends Model {
     return $retarr;
   }
 
+  /**
+  * For now no use for this one
+  */
   private function get_role($id) {
-    
+
   }
 
 /**
 * Validates user and password inspired by:
 * https://stackoverflow.com/questions/11873990/create-preg-match-for-password-validation-allowing
 */
-  public function validate_pass($param) {
-    //preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/',$password)
+  public function load_usr($param) {
+    $retarr = array();
+    if($param['pass1'] == $param['pass2'])
+      preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,12}$/', $param['pass1']);
 
     //and then also check for duplicate username
   }

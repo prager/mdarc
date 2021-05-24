@@ -21,7 +21,7 @@
       <div class="row">
         <div class="col-md-3">&nbsp;</div>
         <div class="col-md-6">
-          <p><?php echo $msg; ?>
+          <p><?php echo $msg; ?></p>
         </div>
       </div>
       <?php } ?>
@@ -158,7 +158,7 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="name-state">* State</label>
-              <?php echo form_dropdown('state', $states, $state, 'class="form-control"'); ?>
+              <?php echo form_dropdown('state_cd', $states, $state_cd, 'class="form-control"'); ?>
             </div>
           </div>
           <div class="col-md-3">
@@ -178,7 +178,6 @@
             </div>
           </div>
       </div>
-
       <div class="row">
         <div class="col-md-3">&nbsp;</div>
         <div class="col-md-3">

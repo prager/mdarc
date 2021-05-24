@@ -15,7 +15,7 @@
 </div>
 <div id="content">
   <div class="container">
-    <?php echo form_open('Home/send_reg'); ?>
+    <?php echo form_open('Home/load_usr'); ?>
     <div class="box">
       <?php if($msg != '') {?>
       <div class="row">
@@ -82,7 +82,6 @@
              <?php echo form_password($data); ?>
             </div>
           </div>
-      </div>
 
       <div class="row">
         <div class="col-md-4">&nbsp;</div>
@@ -99,5 +98,6 @@
       </div>
     </div>
     <?php echo form_close(); ?>
+</div>
   </div>
 </div>
