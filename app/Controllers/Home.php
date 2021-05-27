@@ -53,7 +53,7 @@ class Home extends BaseController {
 
 /**
 * The first step of user registration when the user sends the initial data. The second step will include setting the username and password
-* via routine confirm_reg() below
+* via the confirm_reg() below
 */
 	public function send_reg() {
 
@@ -123,6 +123,9 @@ class Home extends BaseController {
         echo view('template/footer');
 	}
 
+/**
+* This is called by clicking on the emailed URL to confirm registration by setting up username and password
+*/
 	public function confirm_reg() {
 			$this->uri->setSilent();
 			$verifystr = $this->uri->getSegment(3);
@@ -154,6 +157,11 @@ class Home extends BaseController {
 /* --- End of legacy stuff */
 	}
 
+/**
+* This is the final step when user will send his username and password.
+* When these are saved the master user will approve him and only then the user will gain
+* appropriate access according his user profile
+*/
 	public function load_usr() {
 
 	}
@@ -165,6 +173,9 @@ class Home extends BaseController {
 		$param['id_user'] = $this->uri->getSegment(3);
 	}
 
+/**
+* Self-explanatory: calls the logout function from Loging_model
+*/
 	public function logout() {
 		$this->login_mod->logout();
 		echo view('template/header', array('logged' => FALSE));

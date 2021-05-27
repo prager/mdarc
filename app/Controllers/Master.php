@@ -39,7 +39,7 @@ class Master extends BaseController {
 		return $this->response->download('files/users.csv', NULL);
 	}
 
-	public function show_users() {
+	public function edit_users() {
 		//to do code
 	}
 }

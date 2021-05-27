@@ -128,7 +128,9 @@ public function check_credentials($data) {
   $_SESSION = [];
 
 }
-
+/**
+* Checks whether or not user is logged in
+*/
   private function logged_in() {
     $retval = FALSE;
     $db = \Config\Database::connect();
@@ -144,4 +146,17 @@ public function check_credentials($data) {
     return $retval;
   }
 
+  /**
+  * Getter for user type
+  * @param int $id_users
+  * @return int $type_code
+  */
+  public function get_user_type($id) {
+    $retval = FALSE;
+    $db = \Config\Database::connect();
+    $builder = $db->table('users');
+    $builder = $db->where('id_users', $id);
+    $row = $builder->get()->getRow();
+    //finish up!
+  }
 }
