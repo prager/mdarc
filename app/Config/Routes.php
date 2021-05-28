@@ -40,6 +40,7 @@ $routes->add('login', 'Login::index');
 $routes->add('register', 'Home::register');
 $routes->add('print-dir', 'Staff::print_dir');
 $routes->add('edit-users', 'Master::edit_users');
+$routes->add('delete-user/(:num)', 'Master::delete_user');
 
 /**
  * --------------------------------------------------------------------

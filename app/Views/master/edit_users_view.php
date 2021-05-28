@@ -26,7 +26,7 @@
                 <th>Usr Type</th>
                 <th>Position</th>
                 <th>Activate/De-Act</th>
-                <th>Auth/Reject</th>
+                <th>Auth/Unauthorize</th>
                 <th>Delete</th>
               </tr>
             </thead>
@@ -35,17 +35,25 @@
               <tr>
                 <td><a href="#" data-toggle="modal" data-target="#editMem<?php echo $user['id']; ?>"><?php echo $user['fname'] . ' ' . $user['lname']; ?></a>
                          <?php include 'modal_update_mem.php'; ?></td>
-               <td><?php echo $user['cur_year']; ?></td>
-               <td><?php echo $user['mem_type']; ?></td>
+               <td><?php echo $user['type_desc']; ?></td>
+               <td><?php echo $user['pos_name']; ?></td>
+               <td><?php if($user['activated']) {
+                 echo anchor('master/deactivate/' . $user['id'], 'Deactivate');
+               }
+               else {
+                 echo anchor('master/activate/' . $user['id'], 'Activate');
+               } ?></td>
+               <td><?php if($user['authorized']) {
+                 echo anchor('master/un_authorize/' . $user['id'], 'Unauthorize');
+               }
+               else {
+                 echo anchor('master/authorize/' . $user['id'], 'Authorize');
+               } ?></td>
                <td><?php echo $user['callsign']; ?></td>
-               <td><?php echo $user['license']; ?></td>
-               <td><?php echo $user['pay_date']; ?></td>
-               <td><?php echo $user['mem_since']; ?></td>
-               <td><?php echo $user['email']; ?></td>
-                  <td class="text-center">
-                    <a href="#" data-toggle="modal" data-target="#delUser<?php echo $user['id']; ?>"><i class="fa fa-trash"></i></a>
-                    <?php include 'mod_del_user.php'; ?>
-                  </td>
+                <td class="text-center">
+                  <a href="#" data-toggle="modal" data-target="#delUser<?php echo $user['id']; ?>"><i class="fa fa-trash"></i></a>
+                  <?php include 'mod_del_user.php'; ?>
+                </td>
               </tr>
             <?php }?>
             </tbody>
