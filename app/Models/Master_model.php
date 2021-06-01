@@ -39,3 +39,11 @@ public function put_user_types() {
     file_put_contents('files/users.csv', $users_str);
   }
 }
+
+/**
+* Gets data for displaying master_view
+* @return string array $retval
+*/
+public function get_master_data() {
+  //todo: code!
+}
