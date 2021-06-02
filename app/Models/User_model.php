@@ -115,6 +115,17 @@ class User_model extends Model {
     $builder = $db->table('user_types');
     $builder->where('type_code', $retarr['type_code']);
     $retarr['controller'] = $builder->get()->getRow()->controller;
+    $builder->resetQuery();
+
+//get the position name on staff
+    $builder = $db->table('staff');
+    $builder->where('id_user', $user->id_user);
+    if($builder->countAllResults() > 0) {
+      $retarr['pos_name'] = $builder->get->getRow()->position_name;
+    }
+    else {
+      $retarr['pos_name'] = '';
+    }
     $db->close();
     return $retarr;
   }

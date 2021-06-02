@@ -23,8 +23,11 @@ class Master extends BaseController {
 	}
 
 	public function check_master() {
-		if($this->login_mod->is_logged())
-			return TRUE;
+		$retval = FALSE;
+		if($this->login_mod->get_cur_user()['type_code'] == 99) {
+			$retval = TRUE;
+		}
+		return $retval;
 	}
 
 	public function download_user_types() {

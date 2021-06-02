@@ -74,7 +74,9 @@ public function check_credentials($data) {
       $_SESSION['user'] = $usr_arr;
       $_SESSION['id_user'] = $usr_arr['id_user'];
       $_SESSION['logged'] = TRUE;
+  //role is legacy, but leaving it to be
       $_SESSION['role'] = $usr_arr['role'];
+      $_SESSION['type_code'] = $usr_arr['type_code'];
       $_SESSION['level'] = $usr_arr['level'];
       $_SESSION['type_code'] = $usr_arr['type_code'];
       $_SESSION['controller'] = $usr_arr['controller'];
