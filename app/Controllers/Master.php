@@ -22,9 +22,13 @@ class Master extends BaseController {
 			echo view('template/footer');
 	}
 
+/**
+* Checks for master user according to the type code
+*/
 	public function check_master() {
 		$retval = FALSE;
-		if($this->login_mod->get_cur_user()['type_code'] == 99) {
+		$user_arr = $this->login_mod->get_cur_user();
+		if($user_arr['type_code'] == 99 && $user_arr['authorized'] == 1) {
 			$retval = TRUE;
 		}
 		return $retval;

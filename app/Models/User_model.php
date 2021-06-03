@@ -105,6 +105,8 @@ class User_model extends Model {
     $retarr['zip'] = $user->zip_cd;
     $retarr['role'] = $user->type_code;
     $retarr['username'] = $user->username;
+    $retarr['authorized'] = $user->authorized;
+    $retarr['active'] = $user->active;
 //this is legacy
     $retarr['level'] = $user->type_code;
 //this is current
