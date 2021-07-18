@@ -34,7 +34,6 @@
             			?>
             </div>
             <div class="form-group col-lg-4">
-              //for test
               <label class="font-weight-bold text-small" for="callsign"> Callsign<!--<span class="text-primary ml-1">&#42;</span>--></label>
               <?php
             			 $data = array(
