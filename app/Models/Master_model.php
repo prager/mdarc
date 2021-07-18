@@ -23,6 +23,7 @@ public function put_user_types() {
     $types_str .= $type->id_user_types.",".$type->type_code.",".$type->description.",".$type->code_str.",".$type->controller."\n";
   }
   file_put_contents('files/user_types.csv', $types_str);
+  $db->close();
 }
 
 /**
@@ -37,6 +38,7 @@ public function put_user_types() {
       $users_str .= $user->id_user.",".$user->type_code.",".$user->role.",".$user->username.",".$user->authorized.",".$user->active."\n";
     }
     file_put_contents('files/users.csv', $users_str);
+    $db->close();
   }
 
   /**
@@ -44,6 +46,14 @@ public function put_user_types() {
   * @return string array $retval
   */
   public function get_master_data() {
-    //todo: code!
+    $db      = \Config\Database::connect();
+    $builder = $db->table('users');
+    $res = $builder->get()->getResult();
+    $users = array();
+    foreach($res as $user) {
+//finish code
+    }
+//todo: finish the rest
+    $db->close();
   }
 }

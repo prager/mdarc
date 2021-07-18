@@ -46,7 +46,20 @@ class Master extends BaseController {
 		return $this->response->download('files/users.csv', NULL);
 	}
 
+/**
+* Enables master user edit users
+*/
 	public function edit_users() {
-		//to do code
+		echo view('template/header');
+	 if($this->check_master()) {
+			echo view('master/edit_users_view', $this->master_mod->get_users_data());
+		 }
+		 else {
+				 $data['title'] = 'Login Error';
+				 $data['msg'] = 'There was an error while checking your credentials. Click ' . anchor('Home/reset_password', 'here') .
+				 ' to reset your password or go to home page ' . anchor('Home', 'here'). '<br><br>';
+				 echo view('status/status_view', $data);
+		 }
+		 echo view('template/footer');
 	}
 }

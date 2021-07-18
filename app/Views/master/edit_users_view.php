@@ -33,7 +33,7 @@
             <tbody>
             <?php foreach($users as $user) {?>
               <tr>
-                <td><a href="#" data-toggle="modal" data-target="#editMem<?php echo $user['id']; ?>"><?php echo $user['fname'] . ' ' . $user['lname']; ?></a>
+                <td><a href="#" data-toggle="modal" data-target="#editUser<?php echo $user['id']; ?>"><?php echo $user['fname'] . ' ' . $user['lname']; ?></a>
                          <?php include 'modal_update_mem.php'; ?></td>
                <td><?php echo $user['type_desc']; ?></td>
                <td><?php echo $user['pos_name']; ?></td>
