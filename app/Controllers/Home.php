@@ -89,10 +89,12 @@ class Home extends BaseController {
 		//if we have 10 digits left, it's probably valid.
 		if (strlen($justNums) == 10) $isPhoneNum = TRUE;
 
-    echo view('template/header');
-		$retarr = $this->user_mod->register($param);
+		$param['ip'] = $this->get_ip();
+
+		//echo 'ip: ' . $param['ip'];
+		echo view('template/header');
 		if($param['lname'] == '' || $param['fname'] == '' || $email_flag == FALSE || $param['street'] == '' || $param['city'] == '' || $param['zip_cd'] == ''
-				|| $isPhoneNum == FALSE) {
+				|| $isPhoneNum == FALSE || $param['fname'] == $param['lname']) {
             $data = $param;
             $data['state_cd'] = $param['state_cd'];
             $data['zip_cd'] = $param['zip_cd'];
@@ -103,7 +105,9 @@ class Home extends BaseController {
 
         }
         else {
+					$retarr = $this->user_mod->register($param);
           if($retarr['flag']) {
+
               $data['title'] = 'Thank you!';
 
 							$msg_str = 'Your registration has been sent. You will get an email with further instructions within 72 hours. Please, also check your spam messages since
@@ -132,11 +136,16 @@ class Home extends BaseController {
 	    echo view('template/header');
 //commented out until finished
 	    //echo view('public/set_pass_view', $this->user_mod->get_user_to_reg($verifystr));
+			$param['verstr'] = $this->uri->getSegment(3);
+			$param['id_user'] = $this->user_mod->get_usr_verstr(trim($this->uri->getSegment(3)));
 
-//get this out of here when finished
-			$data['title'] = 'Not Done - Conf Registrations';
+			/*$data['title'] = 'Not Done - Conf Registrations';
 			$data['msg'] = 'Still working on this. Check again later. Go to home page ' . anchor('Home', 'here'). '<br><br>';
-			echo view('status/status_view', $data);
+			echo view('status/status_view', $data);*/
+
+			$data['msg'] = '';
+
+			echo view('public/set_pass_view', $data);
 
 	    echo view('template/footer');
 
@@ -158,12 +167,16 @@ class Home extends BaseController {
 	}
 
 /**
-* This is the final step when user will send his username and password.
+* This is the final step for the user when will send his username and password.
 * When these are saved the master user will approve him and only then the user will gain
 * appropriate access according his user profile
 */
 	public function load_usr() {
-
+		echo view('template/header');
+		$data['title'] = 'Not Done - Load User step';
+		$data['msg'] = 'Still working on this. Check again later. Go to home page ' . anchor('Home', 'here'). '<br><br>';
+		echo view('status/status_view', $data);
+		echo view('template/footer');
 	}
 
 /**
@@ -181,6 +194,24 @@ class Home extends BaseController {
 		echo view('template/header', array('logged' => FALSE));
 		echo view('public/main_view');
 		echo view('template/footer');
+	}
+/**
+* Inspired by: https://www.w3resource.com/php-exercises/php-basic-exercise-5.php
+*/
+	private function get_ip() {
+		$ip_address = NULL;
+		if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    	$ip_address = $_SERVER['HTTP_CLIENT_IP'];
+  	}
+	//whether ip is from proxy
+		elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+		  $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		}
+	//whether ip is from remote address
+		else {
+		  $ip_address = $_SERVER['REMOTE_ADDR'];
+		}
+		return $ip_address;
 	}
 
 }

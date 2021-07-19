@@ -123,7 +123,7 @@ class User_model extends Model {
     $builder = $db->table('staff');
     $builder->where('id_user', $user->id_user);
     if($builder->countAllResults() > 0) {
-      $retarr['pos_name'] = $builder->get->getRow()->position_name;
+      $retarr['pos_name'] = $builder->get()->getRow()->position_name;
     }
     else {
       $retarr['pos_name'] = '';
@@ -149,6 +149,13 @@ class User_model extends Model {
       preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,12}$/', $param['pass1']);
 
     //and then also check for duplicate username
+  }
+
+  public function get_usr_verstr($email_key) {
+    $db = \Config\Database::connect();
+    $builder = $db->table('users');
+    $builder->where('email_key', $email_key);
+    return $builder->get()->getRow()->id_user;
   }
 
 }

@@ -30,10 +30,11 @@
           <div class="col-md-5">
             <div class="form-group">
               <?php
+                 $usr = '';
                  $data = array(
                     'name'          => 'user',
                     'id'            => 'user',
-                    'value'         => '',
+                    'value'         => $usr,
                     'maxlength'     => '75',
                     'size'          => '50',
                     'class'			=> 'form-control',
@@ -50,10 +51,11 @@
           <div class="col-md-5">
               <div class="form-group">
                 <?php
+                  $pass = '';
                    $data = array(
                       'name'          => 'pass',
                       'id'            => 'pass',
-                      'value'         => '',
+                      'value'         => $pass,
                       'maxlength'     => '75',
                       'size'          => '50',
                       'class'			=> 'form-control',
