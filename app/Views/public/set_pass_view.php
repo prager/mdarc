@@ -15,7 +15,7 @@
 </div>
 <div id="content">
   <div class="container">
-    <?php echo form_open('Home/load_usr'); ?>
+    <?php echo form_open('load-user' . $id_user); ?>
     <div class="box">
       <?php if($msg != '') {?>
       <div class="row">

@@ -130,14 +130,15 @@ class Home extends BaseController {
 /**
 * This is called by clicking on the emailed URL to confirm registration by setting up username and password
 */
-	public function confirm_reg() {
+	public function set_pass() {
 			$this->uri->setSilent();
-			$verifystr = $this->uri->getSegment(3);
+			$verifystr = $this->uri->getSegment(2);
 	    echo view('template/header');
 //commented out until finished
 	    //echo view('public/set_pass_view', $this->user_mod->get_user_to_reg($verifystr));
-			$param['verstr'] = $this->uri->getSegment(3);
-			$param['id_user'] = $this->user_mod->get_usr_verstr(trim($this->uri->getSegment(3)));
+			//$param['verstr'] = $this->uri->getSegment(2);
+			//echo 'verstr: ' . $param['verstr'];
+			$data['id_user'] = $this->user_mod->get_usr_verstr(trim($this->uri->getSegment(2)));
 
 			/*$data['title'] = 'Not Done - Conf Registrations';
 			$data['msg'] = 'Still working on this. Check again later. Go to home page ' . anchor('Home', 'here'). '<br><br>';

@@ -29,7 +29,7 @@ class User_model extends Model {
     if(($cnt_email == 0) && ($cnt_name == 0)) {
 
       $rand_str = bin2hex(openssl_random_pseudo_bytes(12));
-      $param['verifystr'] = base_url() . '/index.php/Home/confirm_reg/' . $rand_str;
+      $param['verifystr'] = base_url() . '/index.php/set-pass/' . $rand_str;
 	    $param['email_key'] = $rand_str;
 
 /* Uncomment for data insert into db */

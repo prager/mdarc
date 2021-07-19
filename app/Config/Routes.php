@@ -36,11 +36,12 @@ $routes->add('load-silent/(:num)', 'Staff::load_silent');
 $routes->add('unset-silent-key/(:num)', 'Staff::unset_silent');
 $routes->add('members', 'Staff::show_members');
 $routes->add('logout', 'Home::logout');
-$routes->add('login', 'Login::index');
 $routes->add('register', 'Home::register');
 $routes->add('print-dir', 'Staff::print_dir');
 $routes->add('edit-users', 'Master::edit_users');
 $routes->add('delete-user/(:num)', 'Master::delete_user');
+$routes->add('set-pass/(:alphanum)', 'Home::set_pass');
+$routes->add('load-user/(:num)', 'Home::load_user');
 
 /**
  * --------------------------------------------------------------------
