@@ -41,7 +41,7 @@ $routes->add('print-dir', 'Staff::print_dir');
 $routes->add('edit-users', 'Master::edit_users');
 $routes->add('delete-user/(:num)', 'Master::delete_user');
 $routes->add('set-pass/(:alphanum)', 'Home::set_pass');
-$routes->add('load-user/(:num)', 'Home::load_user');
+$routes->add('load-user/(:num)', 'Home::load_usr');
 
 /**
  * --------------------------------------------------------------------

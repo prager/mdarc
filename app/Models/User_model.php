@@ -145,13 +145,15 @@ class User_model extends Model {
 */
   public function load_usr($param) {
     $retarr = array();
-    if($param['pass1'] == $param['pass2'])
-      preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,12}$/', $param['pass1']);
+    if($param['pass'] == $param['pass2'] && preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,12}$/', $param['pass'])) {
+      echo 'OK! ';
+    }
+
 
     //and then also check for duplicate username
   }
 
-  public function get_usr_verstr($email_key) {
+  public function get_id_email_key($email_key) {
     $db = \Config\Database::connect();
     $builder = $db->table('users');
     $builder->where('email_key', $email_key);

@@ -134,37 +134,10 @@ class Home extends BaseController {
 			$this->uri->setSilent();
 			$verifystr = $this->uri->getSegment(2);
 	    echo view('template/header');
-//commented out until finished
-	    //echo view('public/set_pass_view', $this->user_mod->get_user_to_reg($verifystr));
-			//$param['verstr'] = $this->uri->getSegment(2);
-			//echo 'verstr: ' . $param['verstr'];
-			$data['id_user'] = $this->user_mod->get_usr_verstr(trim($this->uri->getSegment(2)));
-
-			/*$data['title'] = 'Not Done - Conf Registrations';
-			$data['msg'] = 'Still working on this. Check again later. Go to home page ' . anchor('Home', 'here'). '<br><br>';
-			echo view('status/status_view', $data);*/
-
+			$data['id_user'] = $this->user_mod->get_id_email_key(trim($this->uri->getSegment(2)));
 			$data['msg'] = '';
-
 			echo view('public/set_pass_view', $data);
-
 	    echo view('template/footer');
-
-/* Below is legacy stuff */
-
-			//$verifystr = uri_string();
-			/*$this->uri->setSilent();
-			$verifystr = $this->uri->getSegment(3);
-			echo 'string: ' . $verifystr;
-			echo view('template/header');
-
-			$data['title'] = 'Not Done - Conf Registrations';
-			$data['msg'] = 'Still working on this. Check again later. Go to home page ' . anchor('Home', 'here'). '<br><br>';
-			echo view('status/status_view', $data);*/
-			//echo view('template/public/update_user_view', $this->user_mod->get_user_to_reg($this->uri->getSegment(3)););
-			//echo view('template/footer');
-
-/* --- End of legacy stuff */
 	}
 
 /**
@@ -174,6 +147,14 @@ class Home extends BaseController {
 */
 	public function load_usr() {
 		echo view('template/header');
+		$param['id_user'] = $this->uri->getSegment(2);
+		$param['pass'] = $this->request->getPost('pass');
+		$param['pass2'] = $this->request->getPost('pass2');
+		$this->user_mod->load_usr($param);
+		/*$data['title'] = 'Username and Password Set!';
+		$data['msg'] = 'You still need to be authorized by the system admin and will be notified soon. Thank you for your interest in MDARC Members Portal! Go back to home page by clicking '
+		 		. anchor('Home', 'here'). '<br><br>';
+		echo view('status/status_view', $data);*/
 		$data['title'] = 'Not Done - Load User step';
 		$data['msg'] = 'Still working on this. Check again later. Go to home page ' . anchor('Home', 'here'). '<br><br>';
 		echo view('status/status_view', $data);
