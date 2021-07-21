@@ -141,22 +141,34 @@ class Home extends BaseController {
 	}
 
 /**
-* This is the final step for the user when will send his username and password.
+* This is the final step for the user registration when he will send his username and password.
 * When these are saved the master user will approve him and only then the user will gain
 * appropriate access according his user profile
+* Also can be used for username and password reset (still todo)
 */
 	public function load_usr() {
 		echo view('template/header');
 		$param['id_user'] = $this->uri->getSegment(2);
 		$param['pass'] = $this->request->getPost('pass');
 		$param['pass2'] = $this->request->getPost('pass2');
-		$this->user_mod->load_usr($param);
-		/*$data['title'] = 'Username and Password Set!';
-		$data['msg'] = 'You still need to be authorized by the system admin and will be notified soon. Thank you for your interest in MDARC Members Portal! Go back to home page by clicking '
-		 		. anchor('Home', 'here'). '<br><br>';
-		echo view('status/status_view', $data);*/
-		$data['title'] = 'Not Done - Load User step';
-		$data['msg'] = 'Still working on this. Check again later. Go to home page ' . anchor('Home', 'here'). '<br><br>';
+		$param['username'] = $this->request->getPost('username');
+		$flags = $this->user_mod->load_usr($param);
+		if ($flags['flag']) {
+			/*$data['title'] = 'Username and Password Set!';
+			$data['msg'] = 'You still need to be authorized by the system admin and will be notified soon. Thank you for your interest in MDARC Members Portal! Go back to home page by clicking '
+			 		. anchor('Home', 'here'). '<br><br>';
+			echo view('status/status_view', $data);*/
+			$data['title'] = 'Not Done - Load User step';
+			$data['msg'] = 'Still working on this. Check again later. Go to home page ' . anchor('Home', 'here'). '<br><br>';
+		}
+		else {
+			$data['msg'] = 'Please, fix the following error(s):<br>';
+			$data['id_user'] = $param['id_user'];
+			if($flags['usr_dup']) $data['msg'] .= '<p style="color:red;">Duplicate username</p>';
+			if(!($flags['pass_match'])) $data['msg'] .= '<p style="color:red;">Passwords do not match</p>';
+			if(!($flags['pass_comp'])) $data['msg'] .= '<p style="color:red;">Password complexity requirement not met</p>';
+			echo view('public/set_pass_view', $data);
+		}
 		echo view('status/status_view', $data);
 		echo view('template/footer');
 	}

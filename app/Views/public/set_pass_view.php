@@ -32,8 +32,8 @@
               <?php
                  $usr = '';
                  $data = array(
-                    'name'          => 'user',
-                    'id'            => 'user',
+                    'name'          => 'username',
+                    'id'            => 'username',
                     'value'         => $usr,
                     'maxlength'     => '75',
                     'size'          => '50',

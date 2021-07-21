@@ -145,12 +145,41 @@ class User_model extends Model {
 */
   public function load_usr($param) {
     $retarr = array();
-    if($param['pass'] == $param['pass2'] && preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,12}$/', $param['pass'])) {
-      echo 'OK! ';
+
+    $retarr['pass_match'] = TRUE;
+    $retarr['pass_comp'] = TRUE;
+    $retarr['flag'] = TRUE;
+    $retarr['usr_dup'] = FALSE;
+
+//check password complexity
+    if($param['pass'] != $param['pass2'] && preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,12}$/', $param['pass'])) {
+      $retarr['pass_comp'] = FALSE;
+      $retarr['flag'] = FALSE;
     }
 
+//check if passwords match
+    if($param['pass'] != $param['pass2']) {
+      $retarr['pass_match'] = FALSE;
+      $retarr['flag'] = FALSE;
+    }
 
-    //and then also check for duplicate username
+//and then also check for duplicate username
+    $db = \Config\Database::connect();
+    $builder = $db->table('users');
+    $builder->where('username', $param['username']);
+    if($builder->countAllResults() > 0) {
+      $retarr['usr_dup'] = TRUE;
+      $retarr['flag'] = FALSE;
+    }
+
+//if not flagged and all good then update username and password
+    if($retarr['flag']) {
+      $param['pass'] = password_hash($param['pass'], PASSWORD_BCRYPT, array('cost' => 12));
+      $update = array('pass' => $param['pass'], 'username' => $param['username'], 'active' => 1);
+      $builder->update($update, ['id_user' => $param['id_user']]);
+    }
+
+    return $retarr;
   }
 
   public function get_id_email_key($email_key) {
