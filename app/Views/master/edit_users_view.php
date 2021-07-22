@@ -34,16 +34,16 @@
             <?php foreach($users as $user) {?>
               <tr>
                 <td><a href="#" data-toggle="modal" data-target="#editUser<?php echo $user['id']; ?>"><?php echo $user['fname'] . ' ' . $user['lname']; ?></a>
-                         <?php include 'modal_update_mem.php'; ?></td>
+                         <?php include 'modal_update_user.php'; ?></td>
                <td><?php echo $user['type_desc']; ?></td>
                <td><?php echo $user['pos_name']; ?></td>
-               <td><?php if($user['activated']) {
+               <td><?php if($user['active'] == 1) {
                  echo anchor('master/deactivate/' . $user['id'], 'Deactivate');
                }
                else {
                  echo anchor('master/activate/' . $user['id'], 'Activate');
                } ?></td>
-               <td><?php if($user['authorized']) {
+               <td><?php if($user['authorized' == 1]) {
                  echo anchor('master/un_authorize/' . $user['id'], 'Unauthorize');
                }
                else {

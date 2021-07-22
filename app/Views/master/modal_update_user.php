@@ -1,12 +1,12 @@
-<div class="modal fade" id="editUser<?php echo $mem['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editUser" aria-hidden="true">
+<div class="modal fade" id="editUser<?php echo $user['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editUser" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content p-md-3">
       <div class="modal-header">
-        <h4 class="modal-title"><?php echo $mem['fname'] . ' ' . $mem['lname'] . ' ' . $mem['callsign']; ?></h4>
+        <h4 class="modal-title"><?php echo $user['fname'] . ' ' . $user['lname'] . ' ' . $user['callsign']; ?></h4>
         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
       </div>
       <div class="modal-body">
-        <?php echo form_open('edit-user/' . $mem['id']); ?>
+        <?php echo form_open('edit-user/' . $user['id']); ?>
           <div class="row">
             <div class="form-group col-lg-4">
               <label class="font-weight-bold text-small" for="cur_year"> Fist Name<!--<span class="text-primary ml-1">&#42;</span>--></label>
@@ -18,7 +18,7 @@
             			     'title' => 'First Name',
                        'class' => 'form-control'
             			 );
-            			 echo form_input($data, $mem['fname']);
+            			 echo form_input($data, $user['fname']);
             			?>
             </div>
             <div class="form-group col-lg-4">
@@ -30,7 +30,7 @@
             			     'title' => 'Last Name',
                        'class' => 'form-control'
             			 );
-            			 echo form_input($data, $mem['lname']);
+            			 echo form_input($data, $user['lname']);
             			?>
             </div>
             <div class="form-group col-lg-4">
@@ -42,12 +42,12 @@
             			     'title' => 'Callsign',
                        'class' => 'form-control'
             			 );
-            			 echo form_input($data, $mem['callsign']);
+            			 echo form_input($data, $user['callsign']);
             			?>
             </div>
             <div class="form-group col-lg-6">
-                <label class="font-weight-bold text-small" for="lic">License Type</label>
-                <?php echo form_dropdown('lic', $lic, $mem['license'], 'class="form-control"'); ?>
+                <label class="font-weight-bold text-small" for="pos">Position Description</label>
+                <?php echo form_dropdown('pos', $user['type_desc'], $user['usr_types'], 'class="form-control"'); ?>
             </div>
             <div class="form-group col-lg-6">&nbsp;</div>
             <div class="form-group col-lg-4">
@@ -59,7 +59,7 @@
                        'title' => 'Cell Phone',
                        'class' => 'form-control'
                    );
-                   echo form_input($data, $mem['w_phone']);
+                   echo form_input($data, $user['w_phone']);
                   ?>
             </div>
             <div class="form-group col-lg-4">
@@ -71,7 +71,7 @@
                        'title' => 'Other Phone',
                        'class' => 'form-control'
                    );
-                   echo form_input($data, $mem['h_phone']);
+                   echo form_input($data, $user['h_phone']);
                   ?>
             </div>
             <div class="form-group col-lg-4">
@@ -84,7 +84,7 @@
             			     'title' => 'Email',
                        'class' => 'form-control'
             			 );
-            			 echo form_input($data, $mem['email']);
+            			 echo form_input($data, $user['email']);
             			?>
             </div>
             <div class="form-group col-lg-2"><label class="font-weight-bold text-small">ARRL Member</label></div>
@@ -94,7 +94,7 @@
                        'id' => 'arrl',
                        'name' => 'arrl',
                        'value' => 'TRUE',
-                       'checked' => $mem['arrl'],
+                       'checked' => $user['arrl'],
                        'class' => 'form-check-input'
                    );
                    echo form_checkbox($data);
@@ -107,7 +107,7 @@
                        'id' => 'carrier',
                        'name' => 'carrier',
                        'value' => 'TRUE',
-                       'checked' => $mem['carrier'],
+                       'checked' => $user['carrier'],
                        'class' => 'form-check-input'
                    );
                    echo form_checkbox($data);
@@ -120,7 +120,7 @@
                        'id' => 'dir',
                        'name' => 'dir',
                        'value' => 'TRUE',
-                       'checked' => $mem['dir'],
+                       'checked' => $user['dir'],
                        'class' => 'form-check-input'
                    );
                    echo form_checkbox($data);
@@ -132,7 +132,7 @@
                        'id' => 'mem_card',
                        'name' => 'mem_card',
                        'value' => 'TRUE',
-                       'checked' =>$mem['mem_card'],
+                       'checked' =>$user['mem_card'],
                        'class' => 'form-check-input'
                    );
                    echo form_checkbox($data);
@@ -148,7 +148,7 @@
             			     'title' => 'Member Since (Year)',
                        'class' => 'form-control'
             			 );
-            			 echo form_input($data, $mem['mem_since']);
+            			 echo form_input($data, $user['mem_since']);
             			?>
             </div>
             <div class="form-group col-lg-4">
@@ -160,7 +160,7 @@
             			     'title' => 'Enter Current Year',
                        'class' => 'form-control'
             			 );
-            			 echo form_input($data, $mem['cur_year']);
+            			 echo form_input($data, $user['cur_year']);
             			?>
             </div>
             <div class="form-group col-lg-4">
@@ -173,7 +173,7 @@
             			     'title' => 'Pay Date',
                        'class' => 'form-control'
             			 );
-            			 echo form_input($data, $mem['pay_date']);
+            			 echo form_input($data, $user['pay_date']);
             			?>
             </div>
 
@@ -186,7 +186,7 @@
             			     'title' => 'Enter Street',
                        'class' => 'form-control'
             			 );
-            			 echo form_input($data, $mem['address']);
+            			 echo form_input($data, $user['address']);
             			?>
             </div>
             <div class="form-group col-lg-6">&nbsp;</div>
@@ -199,12 +199,12 @@
             			     'title' => 'Enter City',
                        'class' => 'form-control'
             			 );
-            			 echo form_input($data, $mem['city']);
+            			 echo form_input($data, $user['city']);
             			?>
             </div>
             <div class="form-group col-lg-4">
                 <label class="font-weight-bold text-small" for="type">State</label>
-                <?php echo form_dropdown('state', $states, $mem['state'], 'class="form-control"'); ?>
+                <?php echo form_dropdown('state', $states, $user['state'], 'class="form-control"'); ?>
             </div>
             <div class="form-group col-lg-4">
             <label class="font-weight-bold text-small" for="zip"> Zip<!--<span class="text-primary ml-1">&#42;</span>--></label>
@@ -215,7 +215,7 @@
           			     'title' => 'Enter Zip',
                      'class' => 'form-control'
           			 );
-          			 echo form_input($data, $mem['zip']);
+          			 echo form_input($data, $user['zip']);
           			?>
             </div>
             <div class="form-group col-lg-12">
@@ -229,11 +229,11 @@
                      'rows' => 4,
                      'cols' => 65
           			 );
-          			 echo form_textarea($data, $mem['comment']);
+          			 echo form_textarea($data, $user['comment']);
           			?>
             </div>
             <div class="form-group col-lg-12">
-              <?php echo anchor('set-silent-key/'. $mem['id'], 'Set Silent Key'); ?>
+              <?php echo anchor('set-silent-key/'. $user['id'], 'Set Silent Key'); ?>
             </div>
             <div class="form-group col-lg-12 text-center"><br>
               <button type="submit" class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> Submit Update</button><br><br>
